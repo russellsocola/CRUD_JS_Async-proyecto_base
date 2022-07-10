@@ -34,30 +34,16 @@ const crearNuevaLinea = (nombre, email) => {
 
 const table = document.querySelector('[data-table]');
 //abrir http (metodo,url)
-
 //CRUD - Metodos HTTP
 //CREATE - POST
 //READ - GET
 //UPDATE - PUT/PATCH
 //DELETE - DELETE
-
+//fetch APi
 const listaClientes = () => {
-  const promise = new Promise((resolve, reject) => {
-    const http = new XMLHttpRequest();
-    http.open('GET', 'http://localhost:3000/perfil');
-
-    http.send();
-
-    http.onload = () => {
-      const response = JSON.parse(http.response);
-      if(http.status >= 400){
-        reject(response);
-      }else{
-        resolve(response);
-      }
-    };
-  });
-  return promise;
+  return fetch("http://localhost:3000/perfil").then( respuesta => {
+    return respuesta.json();
+  })
 };
 
 listaClientes().then((data)=>{
